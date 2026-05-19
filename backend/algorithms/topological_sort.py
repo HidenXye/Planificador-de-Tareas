@@ -32,7 +32,8 @@ def orden_topologico(tareas):
     if len(orden) != len(tareas):
         return None
 
-    return [tareas_map[tid].to_dict() for tid in orden]
+    from funciones import tarea_to_dict
+    return [tarea_to_dict(tareas_map[tid]) for tid in orden]
 
 
 def dependencias_resueltas(tarea, completadas_ids, pendientes_ids=None):

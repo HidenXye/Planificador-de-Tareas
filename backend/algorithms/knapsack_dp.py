@@ -2,12 +2,17 @@ def knapsack_plan(tareas, tiempo_disponible):
     """
     DP 0/1 Knapsack para seleccion optima de tareas.
     Maximiza prioridad total sin exceder tiempo disponible.
-
-    Complejidad: O(n * T) donde T = tiempo_disponible
+    Funcion pura: no modifica las tareas de entrada.
+    Complejidad: O(n * T) donde T = tiempo_disponible.
     Garantiza optimalidad global.
     """
     if not tareas:
-        return {"plan": [], "tiempo_total": 0, "prioridad_total": 0, "tiempo_disponible": tiempo_disponible}
+        return {
+            "plan": [], "tiempo_total": 0, "prioridad_total": 0,
+            "tiempo_disponible": tiempo_disponible
+        }
+
+    from funciones import tarea_to_dict
 
     n = len(tareas)
     T = tiempo_disponible
@@ -18,8 +23,10 @@ def knapsack_plan(tareas, tiempo_disponible):
         tarea = tareas[i - 1]
         for t in range(T + 1):
             if tarea.tiempo_estimado <= t:
-                dp[i][t] = max(dp[i - 1][t],
-                               dp[i - 1][t - tarea.tiempo_estimado] + tarea.prioridad)
+                dp[i][t] = max(
+                    dp[i - 1][t],
+                    dp[i - 1][t - tarea.tiempo_estimado] + tarea.prioridad
+                )
             else:
                 dp[i][t] = dp[i - 1][t]
 
@@ -28,7 +35,7 @@ def knapsack_plan(tareas, tiempo_disponible):
     for i in range(n, 0, -1):
         if dp[i][t_restante] != dp[i - 1][t_restante]:
             tarea = tareas[i - 1]
-            plan.append(tarea.to_dict())
+            plan.append(tarea_to_dict(tarea))
             t_restante -= tarea.tiempo_estimado
 
     plan.reverse()

@@ -1,10 +1,8 @@
-from copy import deepcopy
-
-
 def backtracking_plans(tareas, tiempo_disponible, top_n=3):
     """
     Backtracking con poda para generar las top_n mejores combinaciones
     de tareas que maximizan prioridad total.
+    Funcion pura: no modifica las tareas de entrada.
 
     Poda:
     - Tiempo acumulado > tiempo_disponible
@@ -12,6 +10,8 @@ def backtracking_plans(tareas, tiempo_disponible, top_n=3):
     """
     if not tareas:
         return []
+
+    from funciones import tarea_to_dict
 
     mejores = []
     n = len(tareas)
@@ -22,7 +22,7 @@ def backtracking_plans(tareas, tiempo_disponible, top_n=3):
     def backtrack(idx, tiempo_actual, prioridad_actual, seleccionadas):
         if idx == n:
             registro = {
-                "plan": [tareas[i].to_dict() for i in seleccionadas],
+                "plan": [tarea_to_dict(tareas[i]) for i in seleccionadas],
                 "tiempo_total": tiempo_actual,
                 "prioridad_total": round(prioridad_actual, 1),
                 "tareas_incluidas": len(seleccionadas)
@@ -43,7 +43,8 @@ def backtracking_plans(tareas, tiempo_disponible, top_n=3):
         tarea = tareas[idx]
         if tiempo_actual + tarea.tiempo_estimado <= tiempo_disponible:
             backtrack(idx + 1, tiempo_actual + tarea.tiempo_estimado,
-                      prioridad_actual + tarea.prioridad, seleccionadas + [idx])
+                      prioridad_actual + tarea.prioridad,
+                      seleccionadas + [idx])
 
         backtrack(idx + 1, tiempo_actual, prioridad_actual, seleccionadas)
 
