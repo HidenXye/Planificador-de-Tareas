@@ -4,7 +4,7 @@ from functools import wraps
 from typing import Optional, Tuple, List, Callable
 
 from tipos import (
-    Tarea, Subtarea, Usuario, Evento, Estado,
+    Tarea, Subtarea, Usuario, Estado,
     CATEGORIAS, FRECUENCIAS, TIPOS_ENERGIA, _new_id
 )
 
@@ -262,24 +262,4 @@ def usuario_from_dict(d: dict) -> Usuario:
         tipo_energia=validar_tipo_energia(d.get("tipo_energia", "neutro")),
         notificaciones=d.get("notificaciones", True),
         tema_oscuro=d.get("tema_oscuro", False)
-    )
-
-
-def evento_to_dict(e: Evento) -> dict:
-    return {
-        "id": e.id, "nombre": e.nombre, "duracion": e.duracion,
-        "ubicacion": e.ubicacion, "es_recurrente": e.es_recurrente,
-        "frecuencia": e.frecuencia, "hora_inicio": e.hora_inicio
-    }
-
-
-def evento_from_dict(d: dict) -> Evento:
-    return Evento(
-        id=d.get("id", _new_id()),
-        nombre=d.get("nombre", ""),
-        duracion=d.get("duracion", 60),
-        ubicacion=d.get("ubicacion", ""),
-        es_recurrente=d.get("es_recurrente", False),
-        frecuencia=validar_frecuencia(d.get("frecuencia", "ninguna")),
-        hora_inicio=d.get("hora_inicio")
     )

@@ -15,6 +15,7 @@ from planificador_funcional import (
     agregar_tarea, eliminar_tarea, completar_tarea_estado, obtener_tarea,
     tareas_pendientes, filtrar_por_categoria,
     generar_plan_greedy, generar_plan_knapsack, generar_planes_backtracking,
+    generar_plan_genetic,
     verificar_alertas, clasificar_eisenhower, calcular_metricas,
     actualizar_usuario
 )
@@ -223,6 +224,8 @@ def obtener_plan():
         resultado["backtracking"] = generar_planes_backtracking(
             estado_actual, top_n=3
         )
+    if tipo in ("genetic", "todos"):
+        resultado["genetic"] = generar_plan_genetic(estado_actual)
 
     return jsonify(resultado)
 

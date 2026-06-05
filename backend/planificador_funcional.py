@@ -249,3 +249,8 @@ def generar_planes_backtracking(estado: Estado, top_n: int = 3) -> list:
     from algorithms.backtracking_planner import backtracking_plans
     return backtracking_plans(tareas_pendientes(estado),
                               estado.usuario.tiempo_disponible, top_n)
+
+
+def generar_plan_genetic(estado: Estado) -> dict:
+    from algorithms.genetic_planner import genetic_plan
+    return genetic_plan(tareas_pendientes(estado), estado.usuario.tiempo_disponible)

@@ -45,11 +45,16 @@ export default function PlanPage() {
         <div className="empty-state">
           <Sparkles size={40} />
           <h3>Generando plan optimizado</h3>
-          <p>Ejecutando algoritmos Greedy, Knapsack DP y Backtracking...</p>
+          <p>Ejecutando algoritmos Greedy, Knapsack DP, Backtracking y Algoritmo Genetico...</p>
         </div>
       ) : planData ? (
         <>
-          <PlanComparison greedy={planData.greedy} knapsack={planData.knapsack} />
+          <PlanComparison
+            greedy={planData.greedy}
+            knapsack={planData.knapsack}
+            genetic={planData.genetic}
+            backtracking={planData.backtracking}
+          />
 
           {planData.backtracking && planData.backtracking.length > 0 && (
             <div className="card" style={{ marginTop: '1.25rem' }}>

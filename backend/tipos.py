@@ -41,17 +41,6 @@ class Tarea:
 
 
 @dataclass(frozen=True)
-class Evento:
-    id: str = field(default_factory=_new_id)
-    nombre: str = ""
-    duracion: int = 60
-    ubicacion: str = ""
-    es_recurrente: bool = False
-    frecuencia: str = "ninguna"
-    hora_inicio: Optional[str] = None
-
-
-@dataclass(frozen=True)
 class Usuario:
     nombre: str = "Usuario"
     tiempo_disponible: int = 480
