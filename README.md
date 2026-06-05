@@ -25,6 +25,31 @@ Backend → Python 3.10 + Flask + dataclasses inmutables
 Frontend → React 18 + Vite + Chart.js  
 Datos → JSON plano
 
+## Requisitos
+
+- Python 3.10 o superior
+- Node.js 18 o superior
+
+## Estructura
+
+```
+backend/
+├── algorithms/       # greedy, knapsack, backtracking, genetic
+├── services/         # persistencia JSON y exportación CSV
+├── tipos.py          # dataclasses inmutables (Tarea, Usuario, Estado)
+├── funciones.py      # funciones puras de transformación
+├── planificador_funcional.py
+├── app.py            # API Flask
+└── data/             # tareas.json, historial.json
+
+frontend/
+└── src/
+    ├── components/   # PlanComparison, EisenhowerMatrix, TaskCard
+    ├── pages/        # Dashboard, PlanPage, History, Summary
+    ├── api/          # cliente HTTP
+    └── hooks/        # useDarkMode
+```
+
 ## Cómo correrlo
 
 ```bash
